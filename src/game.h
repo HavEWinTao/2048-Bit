@@ -6,6 +6,7 @@
 #include<time.h>
 
 #define N 4 //сно╥╣дн╛йЩ
+#define BACK_SIZE 512
 
 enum KEY
 {
