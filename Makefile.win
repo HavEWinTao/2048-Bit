@@ -1,0 +1,37 @@
+# Project: Bit2048
+# Makefile created by Dev-C++ 6.7.1
+
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
+WINDRES  = windres.exe
+RES      = Bit2048_private.res
+OBJ      = src/game.o src/main.o $(RES)
+LINKOBJ  = src/game.o src/main.o $(RES)
+LIBS     = -L"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/lib" -L"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/i686-w64-mingw32/lib" -g3 -mwindows -lgraphics -luuid -lmsimg32 -lgdi32 -limm32 -lole32 -loleaut32 -lwinmm -lgdiplus -static
+INCS     = -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/include" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/i686-w64-mingw32/include" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/lib/gcc/i686-w64-mingw32/10.3.0/include" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/lib/gcc/i686-w64-mingw32/10.3.0/include-fixed"
+CXXINCS  = -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/include" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/i686-w64-mingw32/include" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/lib/gcc/i686-w64-mingw32/10.3.0/include" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/lib/gcc/i686-w64-mingw32/10.3.0/include-fixed" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/include/c++/10.3.0" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/include/c++/10.3.0/i686-w64-mingw32" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/include/c++/10.3.0/backward"
+BIN      = Bit2048.exe
+CXXFLAGS = $(CXXINCS) -Wall -Wextra -g3
+ENCODINGS = -finput-charset=utf-8 -fexec-charset=gbk
+CFLAGS   = $(INCS) -Wall -Wextra -g3
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "$(BIN)" $(LIBS)
+
+src/game.o: src/game.c src/game.h
+	$(CPP) -c src/game.c -o src/game.o $(CXXFLAGS) 
+
+src/main.o: src/main.cpp src/game.h
+	$(CPP) -c src/main.cpp -o src/main.o $(CXXFLAGS) 
+
+Bit2048_private.res: Bit2048_private.rc 
+	$(WINDRES) -i Bit2048_private.rc --input-format=rc -o Bit2048_private.res -O coff 
+
