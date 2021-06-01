@@ -8,14 +8,13 @@
 #define N 4 //游戏的维数
 #define BACK_SIZE 512
 
-enum KEY
-{
-	UP,     //上
-	DOWN,   //下
-	LEFT,   //左
-	RIGHT,  //右
-	EXIT,   //退出
-	OTHER   //其他键
+enum KEY {
+    UP,     //上
+    DOWN,   //下
+    LEFT,   //左
+    RIGHT,  //右
+    EXIT,   //退出
+    OTHER   //其他键
 };
 
 /*
