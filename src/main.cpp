@@ -98,6 +98,7 @@ int getInput()
 	int  ret;
 	key_msg keyMsg = {0};
 	keyMsg = getkey();
+	if (keyMsg.msg==key_msg_down){
 	switch(keyMsg.key){
 		case VK_UP:
 		{
@@ -129,6 +130,7 @@ int getInput()
 			ret = OTHER;
 			break;
 		} 
+	}
 	}
 	return ret;
 }
