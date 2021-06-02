@@ -112,7 +112,7 @@ DetectEncoding=0
 Encoding=0
 
 [Unit14]
-FileName=img\gameOver.png
+FileName=img\gameover.png
 Folder=img
 Compile=0
 Link=0

@@ -1,5 +1,11 @@
 #include "game.h"
 
+/*
+ * 函数名:initGame
+ * 功能:对游戏界面数据进行初始化，并产生两个随机数
+ * 参数:需要初始化的游戏数据
+ * 返回值:无
+*/
 void initGame(int data[N][N]) {
     int x = 0, y = 0;
 
@@ -13,7 +19,6 @@ void initGame(int data[N][N]) {
     getRand(data);
     getRand(data);
 }
-
 
 /*
 * 函数名:getRand
@@ -29,7 +34,6 @@ void getRand(int data[N][N]) {
         //随机定位
         x = rand() % N;
         y = rand() % N;
-
         //定位的位置有值了
         if (data[x][y] != 0) {
             continue;
@@ -58,7 +62,6 @@ int checkGameOver(int data[N][N]) {
             }
         }
     }
-
     //判断各行是否可加
     for (x = 0; x < N; ++x) {
         for (y = 0; y < N; ++y) {
@@ -67,7 +70,6 @@ int checkGameOver(int data[N][N]) {
             }
         }
     }
-
     //判断各列是否可加
     for (y = 0; y < N; ++y) {
         for (x = 0; x < N - 1; ++x) {
@@ -76,38 +78,9 @@ int checkGameOver(int data[N][N]) {
             }
         }
     }
+
     //游戏结束
     return 1;
-}
-
-/*
-* 函数名:exitGame()
-* 功能:退出游戏
-* 参数:无
-* 返回值:无
-*/
-void exitGame(void) {
-    exit(0);
-}
-
-//////待实现!!!!!!
-/*
-* 函数名:maxScore
-* 功能:获取游戏数据中的最大数
-* 参数:需要查找的游戏数据
-* 返回值:游戏数据中的最大值
-*/
-int maxScore(int data[N][N]) {
-    int x = 0, y = 0;
-    int maxValue = 0;
-    for (x = 0; x < N; ++x) {
-        for (y = 0; y < N; ++y) {
-            if (maxValue < data[x][y]) {
-                maxValue = data[x][y];
-            }
-        }
-    }
-    return maxValue;
 }
 
 /*
@@ -120,6 +93,7 @@ void moveUp(int data[N][N]) {
     int x = 0, y = 0;
     int idx;
     int isChange = 0;  //可移动标记位
+
     //先累加
     for (y = 0; y < N; ++y) {
         for (x = 0; x < N - 1; ++x) {
@@ -141,7 +115,6 @@ void moveUp(int data[N][N]) {
             }
         }
     }
-
     //累加后移动
     for (y = 0; y < N; ++y) {
         for (x = 1; x < N; ++x) {
@@ -160,7 +133,6 @@ void moveUp(int data[N][N]) {
             }
         }
     }
-
     //成功移动之后需要随机产生一个数
     if (isChange == 1) {
         getRand(data);
@@ -177,6 +149,7 @@ void moveDown(int data[N][N]) {
     int x = 0, y = 0;
     int idx;
     int isChange = 0;  //可移动标记位
+
     //先累加
     for (y = 0; y < N; ++y) {
         for (x = N - 1; x > 0; --x) {
@@ -198,7 +171,6 @@ void moveDown(int data[N][N]) {
             }
         }
     }
-
     //累加后移动
     for (y = 0; y < N; ++y) {
         for (x = N - 2; x >= 0; --x) {
@@ -217,7 +189,6 @@ void moveDown(int data[N][N]) {
             }
         }
     }
-
     //成功移动之后需要随机产生一个数
     if (isChange == 1) {
         getRand(data);
@@ -234,6 +205,7 @@ void moveLeft(int data[N][N]) {
     int x = 0, y = 0;
     int idx;
     int isChange = 0;  //可移动标记位
+
     //先累加
     for (x = 0; x < N; ++x) {
         for (y = 0; y < N - 1; ++y) {
@@ -255,7 +227,6 @@ void moveLeft(int data[N][N]) {
             }
         }
     }
-
     //累加后移动
     for (x = 0; x < N; ++x) {
         for (y = 1; y < N; ++y) {
@@ -274,7 +245,6 @@ void moveLeft(int data[N][N]) {
             }
         }
     }
-
     //成功移动之后需要随机产生一个数
     if (isChange == 1) {
         getRand(data);
@@ -312,7 +282,6 @@ void moveRight(int data[N][N]) {
             }
         }
     }
-
     //累加后移动
     for (x = 0; x < N; ++x) {
         for (y = N - 2; y >= 0; --y) {
@@ -331,23 +300,8 @@ void moveRight(int data[N][N]) {
             }
         }
     }
-
     //成功移动之后需要随机产生一个数
     if (isChange == 1) {
         getRand(data);
     }
-}
-
-////待实现!!!!
-/*
-* 函数名:checkGameWin
-* 功能:判断玩家是否赢得比赛
-* 参数:需要判断的游戏数据
-* 玩家赢则返回1，否则返回0
-*/
-int checkGameWin(int maxScore) {
-    if (maxScore >= 2048) {
-        return 1;
-    }
-    return 0;
 }

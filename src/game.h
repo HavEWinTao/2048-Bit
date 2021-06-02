@@ -5,15 +5,14 @@
 #include<stdlib.h>
 #include<time.h>
 
-#define N 4 //游戏的维数
-#define BACK_SIZE 512
+#define N 4//游戏的维数
+#define BACK_SIZE 512//窗口的大小
 
 enum KEY {
     UP,     //上
     DOWN,   //下
     LEFT,   //左
     RIGHT,  //右
-    EXIT,   //退出
     OTHER   //其他键
 };
 
@@ -40,22 +39,6 @@ void getRand(int data[N][N]);
  * 返回值:游戏结束返回1，没有结束返回0
 */
 int checkGameOver(int data[N][N]);
-
-/*
- * 函数名:exitGame
- * 功能:退出游戏
- * 参数:无
- * 返回值:无
- */
-void exitGame(void);
-
-/*
- * 函数名:maxScore
- * 功能:获取游戏数据中的最大数
- * 参数:需要查找的游戏数据
- * 返回值:游戏数据中的最大值
-*/
-int maxScore(int data[N][N]);
 
 /*
  * 函数名:moveUp
@@ -88,14 +71,5 @@ void moveLeft(int data[N][N]);
 * 返回值:无
 */
 void moveRight(int data[N][N]);
-
-/*
- * 函数名:getInput
- * 功能:获取用户的输入
- * 参数:无
- * 返回值:返回用户输入的按键
-*/
-
-int checkGameWin(int maxScore);
 
 #endif
