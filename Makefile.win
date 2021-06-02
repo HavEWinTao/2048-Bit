@@ -5,8 +5,8 @@ CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
 RES      = Bit2048_private.res
-OBJ      = src/game.o src/main.o $(RES)
-LINKOBJ  = src/game.o src/main.o $(RES)
+OBJ      = src/game.o src/main.o src/test.o $(RES)
+LINKOBJ  = src/game.o src/main.o src/test.o $(RES)
 LIBS     = -L"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/lib" -L"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/i686-w64-mingw32/lib" -g3 -mwindows -lgraphics -luuid -lmsimg32 -lgdi32 -limm32 -lole32 -loleaut32 -lwinmm -lgdiplus -static
 INCS     = -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/include" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/i686-w64-mingw32/include" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/lib/gcc/i686-w64-mingw32/10.3.0/include" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/lib/gcc/i686-w64-mingw32/10.3.0/include-fixed"
 CXXINCS  = -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/include" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/i686-w64-mingw32/include" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/lib/gcc/i686-w64-mingw32/10.3.0/include" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/lib/gcc/i686-w64-mingw32/10.3.0/include-fixed" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/include/c++/10.3.0" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/include/c++/10.3.0/i686-w64-mingw32" -I"E:/BaiduNetdiskDownload/Dev-Cpp/MinGW32/include/c++/10.3.0/backward"
@@ -31,6 +31,9 @@ src/game.o: src/game.c src/game.h
 
 src/main.o: src/main.cpp src/game.h
 	$(CPP) -c src/main.cpp -o src/main.o $(CXXFLAGS) 
+
+src/test.o: src/test.cpp src/game.h
+	$(CPP) -c src/test.cpp -o src/test.o $(CXXFLAGS) 
 
 Bit2048_private.res: Bit2048_private.rc 
 	$(WINDRES) -i Bit2048_private.rc --input-format=rc -o Bit2048_private.res -O coff 
