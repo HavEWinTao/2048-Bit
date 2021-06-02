@@ -1,11 +1,13 @@
 #include "game.h"
 
-void draw(int(*gameData)[N]);//绘图
-void play(int(*gameData)[N]);//获得键值函数
-int getInput();
-void loadImage();
+void draw(int(*gameData)[N]);//页面绘制
+void play(int(*gameData)[N]);//运行逻辑
+int getInput();//输入
+void loadImage();//加载图片
 
-PIMAGE img_background; //开始画图
+//全局变量,避免多次加载图片,导致内存泄漏
+PIMAGE img_background;
+PIMAGE img_gameover;
 PIMAGE img_block2;
 PIMAGE img_block4;
 PIMAGE img_block8;
@@ -18,10 +20,14 @@ PIMAGE img_block512;
 PIMAGE img_block1024;
 PIMAGE img_block2048;
 
-int loc[4]={20,142,266,390};
+//位置信息
+int block_loc[4]={20,142,266,390};
+int gameover_loc[2] = {106,236};
 
-void draw(int(*gameData)[N])           //页面绘制
-{
+int flag = 1;//标记游戏是否结束
+
+//页面绘制
+void draw(int(*gameData)[N]) {
     int i, j;
     cleardevice();
     putimage(0, 0, img_background);
@@ -30,47 +36,47 @@ void draw(int(*gameData)[N])           //页面绘制
             int num = gameData[i][j];
             switch (num) {
                 case 2: {
-                    putimage_withalpha(NULL, img_block2, loc[j], loc[i]);
+                    putimage_withalpha(NULL, img_block2, block_loc[j], block_loc[i]);
                     break;
                 }
                 case 4: {
-                    putimage_withalpha(NULL, img_block4, loc[j], loc[i]);
+                    putimage_withalpha(NULL, img_block4, block_loc[j], block_loc[i]);
                     break;
                 }
                 case 8: {
-                    putimage_withalpha(NULL, img_block8, loc[j], loc[i]);
+                    putimage_withalpha(NULL, img_block8, block_loc[j], block_loc[i]);
                     break;
                 }
                 case 16: {
-                    putimage_withalpha(NULL, img_block16, loc[j], loc[i]);
+                    putimage_withalpha(NULL, img_block16, block_loc[j], block_loc[i]);
                     break;
                 }
                 case 32: {
-                    putimage_withalpha(NULL, img_block32, loc[j], loc[i]);
+                    putimage_withalpha(NULL, img_block32, block_loc[j], block_loc[i]);
                     break;
                 }
                 case 64: {
-                    putimage_withalpha(NULL, img_block64, loc[j], loc[i]);
+                    putimage_withalpha(NULL, img_block64, block_loc[j], block_loc[i]);
                     break;
                 }
                 case 128: {
-                    putimage_withalpha(NULL, img_block128, loc[j], loc[i]);
+                    putimage_withalpha(NULL, img_block128, block_loc[j], block_loc[i]);
                     break;
                 }
                 case 256: {
-                    putimage_withalpha(NULL, img_block256, loc[j], loc[i]);
+                    putimage_withalpha(NULL, img_block256, block_loc[j], block_loc[i]);
                     break;
                 }
                 case 512: {
-                    putimage_withalpha(NULL, img_block512, loc[j], loc[i]);
+                    putimage_withalpha(NULL, img_block512, block_loc[j], block_loc[i]);
                     break;
                 }
                 case 1024: {
-                    putimage_withalpha(NULL, img_block1024, loc[j], loc[i]);
+                    putimage_withalpha(NULL, img_block1024, block_loc[j], block_loc[i]);
                     break;
                 }
                 case 2048: {
-                    putimage_withalpha(NULL, img_block2048, loc[j], loc[i]);
+                    putimage_withalpha(NULL, img_block2048, block_loc[j], block_loc[i]);
                     break;
                 }
                 default:
@@ -80,6 +86,7 @@ void draw(int(*gameData)[N])           //页面绘制
     }
 }
 
+//输入
 int getInput() {
     int ret;
     key_msg keyMsg = {0};
@@ -102,10 +109,6 @@ int getInput() {
                 ret = RIGHT;
                 break;
             }
-            case 'e': {
-                ret = EXIT;
-                break;
-            }
             default: {
                 ret = OTHER;
                 break;
@@ -115,6 +118,7 @@ int getInput() {
     return ret;
 }
 
+//运行逻辑
 void play(int (*gameData)[N]) {
     int key;
     key = getInput();
@@ -135,20 +139,19 @@ void play(int (*gameData)[N]) {
             moveRight(gameData);
             break;
         }
-        case EXIT: {
-            exitGame();
-            break;
-        }
         default:
             break;
     }
     draw(gameData);
 }
 
+//加载图片
 void loadImage() {
     img_background = newimage();
     getimage(img_background, "img/background.png");
 
+    img_gameover = newimage();
+    getimage(img_gameover, "img/gameover.png");
     img_block2 = newimage();
     getimage(img_block2, "img/block_2.png");
     img_block4 = newimage();
@@ -174,18 +177,24 @@ void loadImage() {
 }
 
 int  main() {
+    initgraph(BACK_SIZE, BACK_SIZE);//初始化
+    setcaption("2048");//窗口标题
+    loadImage();//加载图片
+    flushkey();
+
     int gameData[N][N];
     initGame(gameData);
-    initgraph(BACK_SIZE, BACK_SIZE);//初始化
-    setcaption("2048");
-    loadImage();
-
-    flushkey();
 
     draw(gameData);
 
     for (; is_run(); delay_fps(60)) {
-        play(gameData);
+        if (flag == 1) {//未结束
+            play(gameData);
+            if (checkGameOver(gameData)) {//判断是否结束
+                flag = 0;
+                putimage_withalpha(NULL, img_gameover, gameover_loc[0], gameover_loc[1]);
+            }
+        }
     }
     return 0;
 }
