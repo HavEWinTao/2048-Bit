@@ -31,6 +31,24 @@ void getRand(int data[N][N]) {
     int idx = 0;//随机种子索引
     int seedList[] = {2, 2, 2, 2, 2, 2, 2, 2, 4, 4};//值列表
     while (1) {
+        int full = 1;//标记棋盘是否已满
+        for (x = 0; x < N; x++) {
+            if (full == 0) {
+                break;
+            }
+            for (y = 0; y < N; y++) {
+                if (full == 0) {
+                    break;
+                }
+                if (data[x][y] == 0) {
+                    full = 0;
+                    break;
+                }
+            }
+        }
+        if (full == 1) {
+            break;
+        }
         //随机定位
         x = rand() % N;
         y = rand() % N;
