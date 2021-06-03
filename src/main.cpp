@@ -88,8 +88,9 @@ void draw(int(*gameData)[N]) {
 
 // ‰»Î
 int getInput() {
-    int ret;
-    key_msg keyMsg = {0};
+    int ret = -1;
+    key_msg keyMsg;
+    memset(&keyMsg, 0, sizeof(keyMsg));
     keyMsg = getkey();
     if (keyMsg.msg == key_msg_down) {
         switch (keyMsg.key) {
