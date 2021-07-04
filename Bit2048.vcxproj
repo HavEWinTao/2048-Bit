@@ -124,7 +124,7 @@
       <AdditionalLibraryDirectories>D:\masm32\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <MASM>
-      <IncludePaths>D:\masm32\include;%(IncludePaths)</IncludePaths>
+      <IncludePaths>D:\software\masm32\include;%(IncludePaths)</IncludePaths>
     </MASM>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

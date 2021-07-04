@@ -1,1 +1,3 @@
-﻿  Bit2048.vcxproj -> E:\BaiduNetdiskDownload\2048-Bit\Debug\Bit2048.exe
+﻿  Assembling src\game.asm...
+  main.cpp
+  Bit2048.vcxproj -> D:\Code\MASM\assembly-2048\Debug\Bit2048.exe

@@ -1,7 +1,0 @@
-include 文件夹和 lib文件夹 中的文件，复制到VS安装目录中对应的位置。
-其中lib 文件夹中有 x64 和 x86 两个文件夹，都有对应的库文件要放置。
-比如我的是：
-D:\Software\Virtual Studio\VC\Tools\MSVC\14.28.29910\include
-D:\Software\Virtual Studio\VC\Tools\MSVC\14.28.29910\lib\x64
-D:\Software\Virtual Studio\VC\Tools\MSVC\14.28.29910\lib\x86
-
